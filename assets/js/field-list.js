@@ -1,6 +1,6 @@
 $(document).ready(function () {
   $.ajax({
-    url: "http://localhost:5050/cropMonitoring/api/v1/fields/allFields",
+    url: "http://localhost:5050/farm/api/v1/fields/allFields",
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

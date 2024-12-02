@@ -1,7 +1,7 @@
-let signInURI = "http://localhost:5050/cropMonitoring/api/v0/auth/signin";
-let signUpURI = "http://localhost:5050/cropMonitoring/api/v0/auth/signup";
+let signInURI = "http://localhost:5050/farm/api/v0/auth/signin";
+let signUpURI = "http://localhost:5050/farm/api/v0/auth/signup";
 let refreshTokenURI =
-  "http://localhost:5050/cropMonitoring/api/v0/auth/refresh";
+  "http://localhost:5050/farm/api/v0/auth/refresh";
 let token, refreshToken;
 
 // Sign In
@@ -53,7 +53,7 @@ $("#signupForm").on("submit", function (e) {
   console.log("Sign-Up Data:", signUpData);
 
   $.ajax({
-    url: "http://localhost:5050/cropMonitoring/api/v0/auth/signup",
+    url: "http://localhost:5050/farm/api/v0/auth/signup",
     method: "POST",
     data: JSON.stringify(signUpData),
     contentType: "application/json",

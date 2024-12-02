@@ -67,7 +67,7 @@ function generateFieldCode() {
       }
   
       $.ajax({
-        url: `http://localhost:5050/cropMonitoring/api/v1/fields/${fieldCode}`,
+        url: `http://localhost:5050/farm/api/v1/fields/${fieldCode}`,
         type: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -157,7 +157,7 @@ function generateFieldCode() {
       formData.append("fieldImage2", $("#fieldImage2")[0].files[0]);
   
       $.ajax({
-        url: "http://localhost:5050/cropMonitoring/api/v1/fields/savefield",
+        url: "http://localhost:5050/farm/api/v1/fields/savefield",
         type: "POST",
         data: formData,
         contentType: false,
@@ -208,7 +208,7 @@ function generateFieldCode() {
     }
   
     $.ajax({
-      url: `http://localhost:5050/cropMonitoring/api/v1/fields/${fieldCode}`,
+      url: `http://localhost:5050/farm/api/v1/fields/${fieldCode}`,
       type: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -268,7 +268,7 @@ function generateFieldCode() {
     }
   
     $.ajax({
-      url: `http://localhost:5050/cropMonitoring/api/v1/fields/${$(
+      url: `http://localhost:5050/farm/api/v1/fields/${$(
         "#fieldCode"
       ).val()}`,
       type: "PATCH",
