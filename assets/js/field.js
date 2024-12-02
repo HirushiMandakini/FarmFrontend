@@ -157,7 +157,7 @@ $(document).ready(function () {
     formData.append("fieldImage2", $("#fieldImage2")[0].files[0]);
 
     $.ajax({
-      url: "http://localhost:5050/farm/api/v1/fields/savefield",
+      url: "http://localhost:5050/farm/api/v1/fields",
       type: "POST",
       data: formData,
       contentType: false,

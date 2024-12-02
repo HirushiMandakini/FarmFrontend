@@ -291,7 +291,27 @@ document.getElementById("updateBtn").addEventListener("click", function (e) {
     .catch((error) => console.error("Error:", error));
 });
 
-//get all click
+// // //get all click
+// $(document).ready(function () {
+//   $("#getAllBtn").click(function () {
+//     $.ajax({
+//       url: "http://localhost:5050/farm/api/v1/crops/allcrops",
+//       type: "GET",
+//       headers: {
+//         Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       },
+//       success: function (crops) {
+//         localStorage.setItem("cropData", JSON.stringify(crops));
+//         window.location.href = "/pages/crop-list.html";
+//       },
+//       error: function (error) {
+//         console.error("Error fetching crops: ", error);
+//       },
+//     });
+//   });
+// });
+
+// Trigger AJAX call on button click
 $(document).ready(function () {
   $("#getAllBtn").click(function () {
     $.ajax({
@@ -301,18 +321,102 @@ $(document).ready(function () {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       success: function (crops) {
-        localStorage.setItem("cropData", JSON.stringify(crops));
-        window.location.href = "/pages/crop-list.html";
+        try {
+          // Reduce data size if necessary
+          const optimizedCrops = crops.map((crop) => ({
+            cropCode: crop.cropCode,
+            cropName: crop.cropName,
+          }));
+
+          // Store the data in localStorage
+          localStorage.setItem("cropData", JSON.stringify(optimizedCrops));
+
+          // Redirect to the crop list page
+          window.location.href = "/pages/crop-list.html";
+        } catch (error) { 
+          console.error("Failed to store crop data:", error);
+          alert("Data is too large to store. Please try a different method.");
+        }
       },
       error: function (error) {
-        console.error("Error fetching crops: ", error);
+        console.error("Error fetching crops:", error);
       },
     });
   });
 });
-//getall
-// $(document).ready(function () {
-//   $("#getAllBtn").click(function () {
-//     window.location.href = "crop-list.html";
-//   });
+// Sample Base64 string for testing (shortened for brevity)
+const base64Image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA";
+
+// Validate and Assign
+if (base64Image) {
+  document.getElementById("image-id").src = base64Image;
+} else {
+  console.error("Image data is missing");
+}
+
+
+
+// $.ajax({
+//   url: "http://localhost:5050/farm/api/v1/crops/allcrops",
+//   type: "GET",
+//   headers: {
+//     Authorization: `Bearer ${localStorage.getItem("token")}`,
+//   },
+//   success: function (crops) {
+//     try {
+//       // Reduce data size or store in sessionStorage/IndexedDB
+//       const optimizedCrops = crops.map(crop => ({
+//         cropCode: crop.cropCode,
+//         cropName: crop.cropName,
+//       }));
+
+//       localStorage.setItem("cropData", JSON.stringify(optimizedCrops));
+//       window.location.href = "/pages/crop-list.html";
+//     } catch (error) {
+//       console.error("Failed to store crop data:", error);
+//       alert("Data is too large to store. Please try a different method.");
+//     }
+//   },
+//   error: function (error) {
+//     console.error("Error fetching crops: ", error);
+//   },
 // });
+
+if (!localStorage.getItem("cropData")) {
+  $.ajax({
+    url: "http://localhost:5050/farm/api/v1/crops/allcrops",
+    type: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    success: function (crops) {
+      try {
+        const optimizedCrops = crops.map(crop => ({
+          cropCode: crop.cropCode,
+          cropName: crop.cropName,
+        }));
+
+        localStorage.setItem("cropData", JSON.stringify(optimizedCrops));
+
+        if (!localStorage.getItem("redirected")) {
+          localStorage.setItem("redirected", "true");
+          window.location.href = "/pages/crop.html";
+        }
+      } catch (error) {
+        console.error("Failed to store crop data:", error);
+        alert("Data is too large to store. Please try a different method.");
+      }
+    },
+    error: function (error) {
+      console.error("Error fetching crops: ", error);
+    },
+  });
+}
+document.addEventListener("DOMContentLoaded", function () {
+  // Clear the redirected flag
+  localStorage.removeItem("redirected");
+
+  // Process crop data if necessary
+  const cropData = JSON.parse(localStorage.getItem("cropData"));
+  console.log("Loaded crop data:", cropData);
+});
