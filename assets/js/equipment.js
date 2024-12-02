@@ -16,7 +16,7 @@ window.onload = function () {
 };
 
 function loadFields() {
-  fetch("http://localhost:5050/cropMonitoring/api/v1/fields/allFields")
+  fetch("http://localhost:5050/farm/api/v1/fields/allFields")
     .then((response) => response.json())
     .then((data) => {
       const fieldSelect = document.getElementById("assignedField");
@@ -34,7 +34,7 @@ function loadFields() {
 }
 
 function loadStaffs() {
-  fetch("http://localhost:5050/cropMonitoring/api/v1/staff/allstaff")
+  fetch("http://localhost:5050/farm/api/v1/staff/allstaff")
     .then((response) => response.json())
     .then((data) => {
       const staffSelect = document.getElementById("assignedStaff");
@@ -64,7 +64,7 @@ document.getElementById("saveBtn").addEventListener("click", function (e) {
     id: document.getElementById("assignedStaff").value,
   };
 
-  fetch("http://localhost:5050/cropMonitoring/api/v1/equipment", {
+  fetch("http://localhost:5050/farm/api/v1/equipment", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(equipmenteData),
@@ -96,7 +96,7 @@ function searchEquipment() {
 
   $.ajax({
     type: "GET",
-    url: `http://localhost:5050/cropMonitoring/api/v1/equipment?searchTerm=${searchTerm}`,
+    url: `http://localhost:5050/farm/api/v1/equipment?searchTerm=${searchTerm}`,
     success: function (data) {
       if (data && data.length > 0) {
         populateEquipmentForm(data[0]);
@@ -149,7 +149,7 @@ $("#updateBtn").on("click", function (event) {
     };
   
     $.ajax({
-       url: `http://localhost:5050/cropMonitoring/api/v1/equipment/${equipmentId}`,
+       url: `http://localhost:5050/farm/api/v1/equipment/${equipmentId}`,
        method: "PATCH",
        contentType: "application/json",
        data: JSON.stringify(equipmentData),
@@ -176,7 +176,7 @@ $("#deleteBtn").on("click", function (event) {
   
     if (confirm("Are you sure you want to delete this equipment?")) {
       $.ajax({
-        url: `http://localhost:5050/cropMonitoring/api/v1/equipment/${equipmentId}`,
+        url: `http://localhost:5050/farm/api/v1/equipment/${equipmentId}`,
         method: "DELETE",
         success: function () {
           alert("Equipment deleted successfully.");
@@ -193,7 +193,7 @@ $("#deleteBtn").on("click", function (event) {
   $(document).ready(function () {
     $('#getAllBtn').click(function () {
       $.ajax({
-        url: 'http://localhost:5050/cropMonitoring/api/v1/equipment/allEquipment', 
+        url: 'http://localhost:5050/farm/api/v1/equipment/allEquipment', 
         method: 'GET',
         success: function (response) {
           sessionStorage.setItem('equipmentData', JSON.stringify(response));

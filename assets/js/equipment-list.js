@@ -3,7 +3,7 @@ $(document).ready(function () {
   let staffMap = {};
 
   function fetchFields() {
-    return fetch("http://localhost:5050/cropMonitoring/api/v1/fields/allFields")
+    return fetch("http://localhost:5050/farm/api/v1/fields/allFields")
       .then((response) => response.json())
       .then((fields) => {
         fields.forEach((field) => {
@@ -14,7 +14,7 @@ $(document).ready(function () {
   }
 
   function fetchStaff() {
-    return fetch("http://localhost:5050/cropMonitoring/api/v1/staff/allstaff")
+    return fetch("http://localhost:5050/farm/api/v1/staff/allstaff")
       .then((response) => response.json())
       .then((staff) => {
         staff.forEach((person) => {
