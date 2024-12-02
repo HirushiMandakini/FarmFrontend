@@ -37,7 +37,7 @@ document.getElementById("saveBtn").addEventListener("click", function (e) {
     remarks: document.getElementById("remarks").value,
   };
 
-  fetch("http://localhost:5050/cropMonitoring/api/v1/vehicles", {
+  fetch("http://localhost:5050/farm/api/v1/vehicles", {
     method: "POST",
     headers: { "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -87,7 +87,7 @@ function searchVehicle() {
     return;
   }
 
-  fetch(`http://localhost:5050/cropMonitoring/api/v1/vehicles?searchTerm=${encodeURIComponent(searchTerm)}`, {
+  fetch(`http://localhost:5050/farm/api/v1/vehicles?searchTerm=${encodeURIComponent(searchTerm)}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -159,8 +159,8 @@ document.getElementById("updateBtn").addEventListener("click", function (e) {
 
   const vehicleCode = document.getElementById("vehicleCode").value;
 
-  fetch(`http://localhost:5050/cropMonitoring/api/v1/vehicles/${vehicleCode}`, {
-    method: "PATCH",
+  fetch(`http://localhost:5050/farm/api/v1/vehicles/${vehicleCode}`, {
+    method: "PUT",
     headers: { "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`
      },
@@ -193,7 +193,7 @@ document.getElementById("deleteBtn").addEventListener("click", function (e) {
 
   const vehicleCode = document.getElementById("vehicleCode").value;
 
-  fetch(`http://localhost:5050/cropMonitoring/api/v1/vehicles/${vehicleCode}`, {
+  fetch(`http://localhost:5050/farm/api/v1/vehicles/${vehicleCode}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -6,3 +6,4 @@ document.addEventListener("DOMContentLoaded", function () {
       mainContent.style.display = "block";
     }, 1000);
   });
+

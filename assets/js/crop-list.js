@@ -2,7 +2,7 @@ $(document).ready(function () {
   let fieldMap = {};
 
   function fetchFields() {
-    return fetch("http://localhost:5050/cropMonitoring/api/v1/fields/allFields", {
+    return fetch("http://localhost:5050/farm/api/v1/fields/allFields", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

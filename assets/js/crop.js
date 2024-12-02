@@ -35,7 +35,7 @@ function previewCropImage() {
 
 //load all fields for combo-box
 function loadFields() {
-  fetch("http://localhost:5050/cropMonitoring/api/v1/fields/allFields", {
+  fetch("http://localhost:5050/farm/api/v1/fields/allFields", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -83,7 +83,7 @@ document.getElementById("saveBtn").addEventListener("click", function (e) {
   formData.append("cropImage", document.getElementById("cropImage").files[0]);
   formData.append("fieldCode", document.getElementById("field").value);
 
-  fetch("http://localhost:5050/cropMonitoring/api/v1/crops", {
+  fetch("http://localhost:5050/farm/api/v1/crops", {
     method: "POST",
     body: formData,
     headers: {
@@ -137,7 +137,7 @@ function searchCrop() {
   const searchValue = document.getElementById("searchInput").value;
 
   fetch(
-    `http://localhost:5050/cropMonitoring/api/v1/crops?searchTerm=${searchValue}`, {
+    `http://localhost:5050/farm/api/v1/crops?searchTerm=${searchValue}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -211,7 +211,7 @@ document.getElementById("deleteBtn").addEventListener("click", function (e) {
   }
   const cropCode = document.getElementById("cropCode").value;
 
-  fetch(`http://localhost:5050/cropMonitoring/api/v1/crops/${cropCode}`, {
+  fetch(`http://localhost:5050/farm/api/v1/crops/${cropCode}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -263,8 +263,8 @@ document.getElementById("updateBtn").addEventListener("click", function (e) {
   formData.append("cropImage", document.getElementById("cropImage").files[0]);
   formData.append("fieldCode", document.getElementById("field").value);
 
-  fetch(`http://localhost:5050/cropMonitoring/api/v1/crops/${cropCode}`, {
-    method: "PATCH",
+  fetch(`http://localhost:5050/farm/api/v1/crops/${cropCode}`, {
+    method: "PUT",
     body: formData,
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -295,7 +295,7 @@ document.getElementById("updateBtn").addEventListener("click", function (e) {
 $(document).ready(function () {
   $("#getAllBtn").click(function () {
     $.ajax({
-      url: "http://localhost:5050/cropMonitoring/api/v1/crops/allcrops",
+      url: "http://localhost:5050/farm/api/v1/crops/allcrops",
       type: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -310,3 +310,9 @@ $(document).ready(function () {
     });
   });
 });
+//getall
+// $(document).ready(function () {
+//   $("#getAllBtn").click(function () {
+//     window.location.href = "crop-list.html";
+//   });
+// });
