@@ -294,3 +294,14 @@ $(document).ready(function () {
     });
   });
 });
+
+
+document.getElementById('equipmentName').addEventListener('input', function (event) {
+  const input = event.target;
+  const isValid = /^[A-Za-z\s]*$/.test(input.value);
+  if (!isValid) {
+    input.classList.add('is-invalid');
+  } else {
+    input.classList.remove('is-invalid');
+  }
+});
